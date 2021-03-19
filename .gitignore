@@ -1,0 +1,7 @@
+*
+!.gitignore
+!CS.hlsl
+!d3dx12.h
+!main.cpp
+!make.cmd
+!README.md
