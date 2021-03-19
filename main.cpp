@@ -20,21 +20,21 @@
 using Microsoft::WRL::ComPtr;
 using namespace std;
 
-#define HrEnsure(e_)                                                                            \
-  ([](HRESULT Value) {                                                                          \
-    if (SUCCEEDED(Value))                                                                       \
-      return;                                                                                   \
-    fprintf(stderr, TEXT("line=%d Value=0x%.8x: %s\n"), __LINE__, static_cast<unsigned>(Value), \
-        _com_error(Value).ErrorMessage());                                                      \
-    abort();                                                                                    \
+#define HrEnsure(e_)                                                                      \
+  ([](HRESULT Value) {                                                                    \
+    if (SUCCEEDED(Value))                                                                 \
+      return;                                                                             \
+    fprintf(stderr, "line=%d Value=0x%.8x: %s\n", __LINE__, static_cast<unsigned>(Value), \
+        _com_error(Value).ErrorMessage());                                                \
+    abort();                                                                              \
   }(e_))
 
-#define Ensure(e_)                                                     \
-  ([](bool Pred) {                                                     \
-    if (Pred)                                                          \
-      return;                                                          \
-    fprintf(stderr, TEXT("line=%d false: %s\n"), __LINE__, TEXT(#e_)); \
-    abort();                                                           \
+#define Ensure(e_)                                               \
+  ([](bool Pred) {                                               \
+    if (Pred)                                                    \
+      return;                                                    \
+    fprintf(stderr, "line=%d false: %s\n", __LINE__, TEXT(#e_)); \
+    abort();                                                     \
   }(static_cast<bool>(e_)))
 
 enum ComputeRootParameters : UINT {
@@ -144,14 +144,14 @@ void InitPipeline(const char* CsPath) {
 }
 
 int main() {
-  printf(TEXT("Initializing pipeline...\n"));
+  printf("Initializing pipeline...\n");
 
   InitPipeline("CS.cso");
 
 #if USE_NVIDIA
-  printf(TEXT("If you reached here then you are too lucky to reproduce this bug :(\n"));
+  printf("If you reached here then you are too lucky to reproduce this bug :(\n");
 #else
-  printf(TEXT("Cool :)\n"));
+  printf("Cool :)\n");
 #endif
 
   return EXIT_SUCCESS;
